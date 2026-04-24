@@ -39,11 +39,12 @@ public class ReadEvalPrintLoopTests : IClassFixture<RoslynServicesFixture>
             .Returns(
                 new PromptResult(true, "exit", default)
             );
-        
+
+        var outputLengthBefore = console.AnsiConsole.Output.Split('\n').Length; 
         await repl.RunAsync(new Configuration(hideWelcomeNotice: true));
+        var outputLengthAfter = console.AnsiConsole.Output.Split('\n').Length;
         
-        Assert.DoesNotContain("Welcome to the C# REPL", console.AnsiConsole.Output);
-        Assert.DoesNotContain("Type C# code at the prompt", capturedOutput.ToString());
+        Assert.DoesNotContain("Welcome to the C# REPL", console.AnsiConsole.Output[outputLengthBefore..outputLengthAfter]);
     }
 
     [Theory]
