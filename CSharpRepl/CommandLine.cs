@@ -9,6 +9,7 @@ using System.CommandLine.Builder;
 using System.CommandLine.Completions;
 using System.CommandLine.IO;
 using System.CommandLine.Parsing;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -54,6 +55,11 @@ internal static class CommandLine
         getDefaultValue: () => Configuration.FrameworkDefault
     )
     .AddCompletions(SharedFramework.SupportedFrameworks);
+
+    private static readonly Option<bool> HideWelcomeNotice = new(
+        aliases: ["--hideWelcomeNotice"],
+        description: "Hides the welcome notice that is printed on REPL startup."
+    );
 
     private static readonly Option<string> Theme = new(
         aliases: ["--theme", "-t", "/t"],
@@ -187,7 +193,7 @@ internal static class CommandLine
 
         var availableCommands = new RootCommand("C# REPL")
         {
-            References, Usings, Framework, Theme, UseTerminalPaletteTheme, Prompt, UseUnicode, UsePrereleaseNugets,
+            References, Usings, Framework, HideWelcomeNotice, Theme, UseTerminalPaletteTheme, Prompt, UseUnicode, UsePrereleaseNugets,
             StreamPipedInput, Trace, Version, Help, TabSize,
             OpenAIApiKey, OpenAIPrompt, OpenAIModel, OpenAIHistoryCount,
             TriggerCompletionListKeyBindings, NewLineKeyBindings, SubmitPromptKeyBindings, SubmitPromptDetailedKeyBindings,
@@ -222,6 +228,7 @@ internal static class CommandLine
             references: commandLine.GetValueForOption(References),
             usings: commandLine.GetValueForOption(Usings),
             framework: commandLine.GetValueForOption(Framework),
+            hideWelcomeNotice: commandLine.GetValueForOption(HideWelcomeNotice),
             loadScript: ProcessScriptArguments(args),
             loadScriptArgs: commandLine.UnparsedTokens.ToArray(),
             theme: commandLine.GetValueForOption(Theme),

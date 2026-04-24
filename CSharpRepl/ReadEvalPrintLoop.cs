@@ -39,10 +39,14 @@ internal sealed class ReadEvalPrintLoop
 
     public async Task RunAsync(Configuration config)
     {
-        console.WriteLine("Welcome to the C# REPL (Read Eval Print Loop)!");
-        console.WriteLine("Type C# expressions and statements at the prompt and press Enter to evaluate them.");
-        console.WriteLine($"Type {Help} to learn more, {Exit} to quit, and {Clear} to clear your terminal.");
-        console.WriteLine(string.Empty);
+        if (!config.HideWelcommeNotice)
+        {
+            console.WriteLine("Welcome to the C# REPL (Read Eval Print Loop)!");
+            console.WriteLine("Type C# expressions and statements at the prompt and press Enter to evaluate them.");
+            console.WriteLine($"Type {Help} to learn more, {Exit} to quit, and {Clear} to clear your terminal.");
+            console.WriteLine(string.Empty);
+        }
+
 
         await Preload(roslyn, console, config).ConfigureAwait(false);
 
