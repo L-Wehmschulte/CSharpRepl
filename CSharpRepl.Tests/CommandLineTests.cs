@@ -32,6 +32,14 @@ public class CommandLineTests
         Assert.Equal("Microsoft.AspNetCore.App", concatenatedValue.Framework);
     }
 
+    [Fact]
+    public void ParseArguments_HideWelcomeNoticeArgument_SetsHideWelcomeNotice()
+    {
+        var result = Parse($"--hideWelcomeNotice");
+        Assert.NotNull(result);
+        Assert.True(result.HideWelcomeNotice);
+    }
+
     [Theory]
     [InlineData("-u"), InlineData("--using"), InlineData("/u")]
     public void ParseArguments_UsingArguments_ProducesUsings(string flag)

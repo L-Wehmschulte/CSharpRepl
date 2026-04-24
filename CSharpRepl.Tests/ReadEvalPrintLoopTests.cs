@@ -31,6 +31,21 @@ public class ReadEvalPrintLoopTests : IClassFixture<RoslynServicesFixture>
         this.repl = new ReadEvalPrintLoop(console, services, prompt);
     }
 
+    [Fact]
+    public async Task RunAsync_HideWelcomeNoticeSet_DoesNotShowWelcomeNotice()
+    {
+        prompt
+            .ReadLineAsync()
+            .Returns(
+                new PromptResult(true, "exit", default)
+            );
+        
+        await repl.RunAsync(new Configuration(hideWelcomeNotice: true));
+        
+        Assert.DoesNotContain("Welcome to the C# REPL", console.AnsiConsole.Output);
+        Assert.DoesNotContain("Type C# code at the prompt", capturedOutput.ToString());
+    }
+
     [Theory]
     [InlineData("help")]
     [InlineData("#help")]

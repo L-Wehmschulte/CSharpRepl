@@ -366,6 +366,7 @@ internal static class CommandLine
             $"  [green]--streamPipedInput[/]:                         {StreamPipedInput.Description}" + NewLine +
             $"  [green]--tabSize[/] [cyan]<width>[/]:                          {TabSize.Description}" + NewLine +
             $"  [green]--culture[/] [cyan]<culture name>[/]:                   {Culture.Description}" + NewLine +
+            $"  [green]--hideWelcomeNotice[/]:                        {HideWelcomeNotice.Description}" + NewLine +
             NewLine +
             $"  Key Bindings" + NewLine +
             $"  [green]--triggerCompletionListKeys[/] [cyan]<key-binding>[/]:  {TriggerCompletionListKeyBindings.Description}" + NewLine +

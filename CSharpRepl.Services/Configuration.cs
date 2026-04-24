@@ -48,7 +48,7 @@ public sealed class Configuration
     public string Framework { get; }
     public bool Trace { get; }
     public Theme Theme { get; }
-    public bool HideWelcommeNotice { get; }
+    public bool HideWelcomeNotice { get; }
     public bool UseTerminalPaletteTheme { get; }
     public FormattedString Prompt { get; }
     public bool UseUnicode { get; }
@@ -89,7 +89,7 @@ public sealed class Configuration
         References = references?.ToHashSet() ?? [];
         Usings = usings?.ToHashSet() ?? [];
         Framework = framework ?? FrameworkDefault;
-        HideWelcommeNotice = hideWelcomeNotice;
+        HideWelcomeNotice = hideWelcomeNotice;
         Trace = trace;
         UseTerminalPaletteTheme = useTerminalPaletteTheme;
 

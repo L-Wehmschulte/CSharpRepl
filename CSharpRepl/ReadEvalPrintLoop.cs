@@ -39,7 +39,7 @@ internal sealed class ReadEvalPrintLoop
 
     public async Task RunAsync(Configuration config)
     {
-        if (!config.HideWelcommeNotice)
+        if (!config.HideWelcomeNotice)
         {
             console.WriteLine("Welcome to the C# REPL (Read Eval Print Loop)!");
             console.WriteLine("Type C# expressions and statements at the prompt and press Enter to evaluate them.");
